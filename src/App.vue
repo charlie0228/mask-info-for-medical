@@ -38,6 +38,10 @@
       </el-main>
       <Result v-if="inputText" :data="singlePharmacyData" />
     </el-container>
+    <div class="footer">
+      Powered by
+      <a href="https://github.com/charlie0228">charlie0228</a>
+    </div>
   </div>
 </template>
 
@@ -143,6 +147,18 @@ export interface Props {}
 
 body {
   min-height: 100vh;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding-bottom: 15px;
+
+  a {
+    text-decoration: none;
+  }
 }
 
 #app {
