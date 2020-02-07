@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <div class="apiInfo">API 資料最後更新日期：{{ lastUpdate }}</div>
+    <div class="header">
+      <img src="@/assets/logo.png" alt="中華民國藥師公會全國聯合會" class="logo" />
+      <div class="apiInfo">API 資料最後更新日期：{{ lastUpdate }}</div>
+    </div>
     <el-container>
       <el-header style="height: auto;">
         <h1>
@@ -29,12 +32,7 @@
               :disabled="!inputText.length || !isInit"
               @click="getFilterData"
             >搜尋</el-button>
-            <el-button
-              type="info"
-              icon="el-icon-delete"
-              @click="resetData"
-              :loading="isLoading"
-            >清除</el-button>
+            <el-button type="info" icon="el-icon-delete" @click="resetData" :loading="isLoading">清除</el-button>
           </div>
         </el-row>
       </el-main>
@@ -79,7 +77,7 @@ export default {
       this.singlePharmacyData = data ? data : "查無醫事機構資料";
     },
     resetData() {
-      this.inputText = '';
+      this.inputText = "";
       this.singlePharmacyData = null;
     }
   },
@@ -151,9 +149,21 @@ body {
   font-family: "Noto Sans TC", sans-serif;
   font-size: 16px;
 
-  .apiInfo {
-    width: 100%;
-    text-align: right;
+  .header {
+    display: flex;
+    justify-content: space-between;
+
+    .logo {
+      width: 300px;
+
+      @media (max-width: 767px) {
+        width: 150px;
+      }
+    }
+
+    .apiInfo {
+      text-align: right;
+    }
   }
 
   .el-header {
