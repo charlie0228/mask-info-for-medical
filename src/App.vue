@@ -1,29 +1,40 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-  </div>
+  <div id="app"></div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import Vue from "vue";
+import { ThisTypedComponentOptionsWithRecordProps } from "vue/types/options";
+import { CombinedVueInstance } from "vue/types/vue";
 
-export default Vue.extend({
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-});
+export default {} as ComponentOption;
+
+export type ComponentOption = ThisTypedComponentOptionsWithRecordProps<
+  Instance,
+  Data,
+  Methods,
+  Computed,
+  Props
+>;
+
+export type ComponentInstance = CombinedVueInstance<
+  Instance,
+  Data,
+  Methods,
+  Computed,
+  Props
+>;
+
+export interface Instance extends Vue {}
+
+export interface Data {}
+
+export interface Methods {}
+
+export interface Computed {}
+
+export interface Props {}
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss" scoped>
 </style>
