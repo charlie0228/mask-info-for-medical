@@ -103,6 +103,12 @@ export default {
       this.getPharmacyData();
       console.log("Last update:", this.lastUpdate);
     }, 60000);
+  },
+  watch: {
+    pharmacyData() {
+      if (this.singlePharmacyData === null) return;
+      this.getFilterData();
+    }
   }
 } as ComponentOption;
 
@@ -139,7 +145,7 @@ export interface Methods {
 }
 
 export interface Computed {
-  lastUpdate: string
+  lastUpdate: string;
 }
 
 export interface Props {}

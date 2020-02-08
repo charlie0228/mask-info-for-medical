@@ -14,9 +14,9 @@
       </div>
       <hr />
       <div class="Reslut__mask">
-        成人口罩剩餘數量：<span>{{ data.properties.mask_adult }}</span>
+        成人口罩剩餘數量：<span>{{ data.properties.mask_adult }} 個口罩</span>
         <br />
-        兒童口罩剩餘數量：<span>{{ data.properties.mask_child }}</span>
+        兒童口罩剩餘數量：<span>{{ data.properties.mask_child }} 個口罩</span>
         <br />
         數量資料最後更新時間：{{ data.properties.updated }}
         <br />
