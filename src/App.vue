@@ -2,7 +2,6 @@
   <div id="app">
     <div class="header">
       <img src="@/assets/logo.png" alt="中華民國藥師公會全國聯合會" class="logo" />
-      <div class="apiInfo">API 資料最後更新日期：{{ lastUpdate }}</div>
     </div>
     <el-container>
       <el-header style="height: auto;">
@@ -13,6 +12,7 @@
         <h3>
           ℹ️ 部分藥局因採發放號碼牌方式，方便民眾購買口罩，系統目前無法顯示已發送號碼牌數量。
           <br />ℹ️ 口罩數量以藥局實際存量為主，線上查詢之數量僅供參考。
+          <br />ℹ️ 藥師如對數字有疑問請洽藥師公會全聯會 02-25953856 轉分機 129。
         </h3>
       </el-header>
       <el-main>
@@ -95,12 +95,13 @@ export default {
   },
   async created() {
     await this.getPharmacyData();
+    console.log("Last update:", this.lastUpdate);
     this.isInit = true;
   },
   mounted() {
     window.setInterval(() => {
       this.getPharmacyData();
-      console.log("reload");
+      console.log("Last update:", this.lastUpdate);
     }, 60000);
   }
 } as ComponentOption;
@@ -137,13 +138,19 @@ export interface Methods {
   resetData: () => void;
 }
 
-export interface Computed {}
+export interface Computed {
+  lastUpdate: string
+}
 
 export interface Props {}
 </script>
 
 <style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap");
+
+* {
+  box-sizing: border-box;
+}
 
 body {
   min-height: 100vh;
@@ -152,9 +159,12 @@ body {
 .footer {
   position: fixed;
   bottom: 0;
+  left: 0;
   width: 100%;
+  height: 50px;
   text-align: center;
-  padding-bottom: 15px;
+  background: white;
+  padding: 10px 0 15px;
 
   a {
     text-decoration: none;
@@ -173,13 +183,13 @@ body {
       width: 300px;
 
       @media (max-width: 767px) {
-        width: 150px;
+        width: 100%;
       }
     }
+  }
 
-    .apiInfo {
-      text-align: right;
-    }
+  .el-container {
+    margin-bottom: 100px;
   }
 
   .el-header {
@@ -195,6 +205,7 @@ body {
 
     h3 {
       color: red;
+      line-height: 1.75;
 
       @media (max-width: 767px) {
         font-size: 1rem;

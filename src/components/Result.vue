@@ -72,6 +72,7 @@ export interface Props {
 <style lang="scss" scoped>
 .Reslut {
   font-size: 1.5rem;
+  padding: 0 15px;
 
   hr {
     width: 100%;
