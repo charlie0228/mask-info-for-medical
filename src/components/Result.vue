@@ -1,5 +1,5 @@
 <template>
-  <div class="Reslut">
+  <div class="Reslut" v-if="$route.params.id">
     <div v-if="typeof data === 'string' || !data"  class="Reslut__noContent">{{ data }}</div>
     <div v-else class="Reslut__content">
       <div class="Reslut__geo">

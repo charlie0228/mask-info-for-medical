@@ -35,8 +35,11 @@
             <el-button type="info" icon="el-icon-delete" @click="resetData" :loading="isLoading">清除</el-button>
           </div>
         </el-row>
+        <el-row type="flex" justify="center" v-if="!(typeof singlePharmacyData === 'string' || !singlePharmacyData)">
+          <router-link :to="`${$route.path}`">醫事機構代碼：5901012409 專用查詢網址</router-link>
+        </el-row>
       </el-main>
-      <Result v-if="inputText" :data="singlePharmacyData" />
+      <router-view :key="$route.params.id" :data="singlePharmacyData" />
     </el-container>
     <div class="footer">
       Powered by
@@ -79,10 +82,18 @@ export default {
       this.isLoading = false;
 
       this.singlePharmacyData = data ? data : "查無醫事機構資料";
+
+      if (this.inputText !== this.$route.params.id) {
+        this.updateRoute(this.inputText);
+      }
     },
     resetData() {
       this.inputText = "";
       this.singlePharmacyData = null;
+      this.updateRoute(this.inputText);
+    },
+    updateRoute(id) {
+      this.$router.push(`/${id}`);
     }
   },
   computed: {
@@ -108,6 +119,12 @@ export default {
     pharmacyData() {
       if (this.singlePharmacyData === null) return;
       this.getFilterData();
+    },
+    isInit(val) {
+      if (val && this.$route.params.id) {
+        this.inputText = this.$route.params.id;
+        this.getFilterData();
+      }
     }
   }
 } as ComponentOption;
@@ -142,6 +159,7 @@ export interface Methods {
   getPharmacyData: () => void;
   getFilterData: () => void;
   resetData: () => void;
+  updateRoute: (id: string) => void;
 }
 
 export interface Computed {
@@ -156,6 +174,15 @@ export interface Props {}
 
 * {
   box-sizing: border-box;
+
+  a {
+    text-decoration: none;
+    color: #409eff;
+
+    &:hover {
+      color: #66b1ff;
+    }
+  }
 }
 
 body {
@@ -171,10 +198,6 @@ body {
   text-align: center;
   background: white;
   padding: 10px 0 15px;
-
-  a {
-    text-decoration: none;
-  }
 }
 
 #app {
