@@ -124,6 +124,9 @@ export default {
       if (val && this.$route.params.id) {
         this.inputText = this.$route.params.id;
         this.getFilterData();
+        console.log('isInit', val);
+        console.log('this.$route.params.id', this.$route.params.id);
+        console.log('this.inputText', this.inputText);
       }
     }
   }
