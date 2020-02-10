@@ -35,8 +35,10 @@
             <el-button type="info" icon="el-icon-delete" @click="resetData" :loading="isLoading">清除</el-button>
           </div>
         </el-row>
-        <el-row type="flex" justify="center" v-if="!(typeof singlePharmacyData === 'string' || !singlePharmacyData)">
-          <router-link :to="`${$route.path}`">醫事機構代碼：5901012409 專用查詢網址</router-link>
+        <el-row type="flex" justify="center" style="margin-top:15px; flex-direction: column; align-items: center;" v-if="!(typeof singlePharmacyData === 'string' || !singlePharmacyData)">
+          <router-link :to="`${$route.path}`">醫事機構代碼：{{ $route.params.id }} 專用查詢網址：</router-link>
+          <router-link :to="`${$route.path}`">{{ currentPath }}</router-link>
+          <span>將上面連結加入我的最愛，即可快速查詢 <span style="color: #67C23A;">醫事機構代碼：{{ $route.params.id }}</span> 口罩剩餘數量</span>
         </el-row>
       </el-main>
       <router-view :key="$route.params.id" :data="singlePharmacyData" />
@@ -102,6 +104,9 @@ export default {
       return this.pharmacyData.find(
         pharmacy => pharmacy.properties.updated.length > 0
       )!.properties.updated;
+    },
+    currentPath() {
+      return window.location.href;
     }
   },
   async created() {
@@ -167,6 +172,7 @@ export interface Methods {
 
 export interface Computed {
   lastUpdate: string;
+  currentPath: string;
 }
 
 export interface Props {}
