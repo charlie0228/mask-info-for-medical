@@ -1,7 +1,11 @@
 <template>
   <div id="app">
     <div class="header">
-      <img src="@/assets/logo.png" alt="中華民國藥師公會全國聯合會" class="logo" />
+      <img
+        src="@/assets/logo.png"
+        alt="中華民國藥師公會全國聯合會"
+        class="logo"
+      />
     </div>
     <el-container>
       <el-header style="height: auto;">
@@ -10,9 +14,10 @@
           <br />社區藥局端使用
         </h1>
         <h3>
-          ℹ️ 部分藥局因採發放號碼牌方式，方便民眾購買口罩，系統目前無法顯示已發送號碼牌數量。
-          <br />ℹ️ 口罩數量以藥局實際存量為主，線上查詢之數量僅供參考。
-          <br />ℹ️ 藥師如對數字有疑問請洽藥師公會全聯會 02-25953856 轉分機 129。
+          ℹ️
+          部分藥局因採發放號碼牌方式，方便民眾購買口罩，系統目前無法顯示已發送號碼牌數量。
+          <br />ℹ️ 口罩數量以藥局實際存量為主，線上查詢之數量僅供參考。 <br />ℹ️
+          藥師如對數字有疑問請洽藥師公會全聯會 02-25953856 轉分機 129。
         </h3>
       </el-header>
       <el-main>
@@ -31,21 +36,35 @@
               :loading="isLoading"
               :disabled="!inputText.length || !isInit"
               @click="getFilterData"
-            >搜尋</el-button>
-            <el-button type="info" icon="el-icon-delete" @click="resetData" :loading="isLoading">清除</el-button>
+              >搜尋</el-button
+            >
+            <el-button
+              type="info"
+              icon="el-icon-delete"
+              @click="resetData"
+              :loading="isLoading"
+              >清除</el-button
+            >
           </div>
         </el-row>
         <el-row
           type="flex"
           justify="center"
           style="margin-top:15px; flex-direction: column; align-items: center;"
-          v-if="!(typeof singlePharmacyData === 'string' || !singlePharmacyData)"
+          v-if="
+            !(typeof singlePharmacyData === 'string' || !singlePharmacyData)
+          "
         >
-          <router-link :to="`${$route.path}`">醫事機構代碼：{{ $route.params.id }} 專用查詢網址：</router-link>
+          <router-link :to="`${$route.path}`"
+            >醫事機構代碼：{{ $route.params.id }} 專用查詢網址：</router-link
+          >
           <router-link :to="`${$route.path}`">{{ currentPath }}</router-link>
           <span>
             將上面連結加入我的最愛，即可快速查詢
-            <span style="color: #67C23A;">醫事機構代碼：{{ $route.params.id }}</span> 口罩剩餘數量
+            <span style="color: #67C23A;"
+              >醫事機構代碼：{{ $route.params.id }}</span
+            >
+            口罩剩餘數量
           </span>
         </el-row>
       </el-main>
@@ -67,7 +86,7 @@ import Result from "./components/Result.vue";
 
 export default {
   components: {
-    Result
+    Result,
   },
   data() {
     return {
@@ -75,7 +94,7 @@ export default {
       isInit: false,
       inputText: "",
       singlePharmacyData: null,
-      isLoading: false
+      isLoading: false,
     };
   },
   methods: {
@@ -87,7 +106,7 @@ export default {
       this.isLoading = true;
 
       const data = this.pharmacyData.find(
-        pharmacy => pharmacy.properties.id === this.inputText
+        (pharmacy) => pharmacy.properties.id === this.inputText
       );
       this.isLoading = false;
 
@@ -104,18 +123,18 @@ export default {
     },
     updateRoute(id) {
       this.$router.push(`/${id}`);
-    }
+    },
   },
   computed: {
     lastUpdate() {
       if (!this.pharmacyData) return "";
       return this.pharmacyData.find(
-        pharmacy => pharmacy.properties.updated.length > 0
+        (pharmacy) => pharmacy.properties.updated.length > 0
       )!.properties.updated;
     },
     currentPath() {
       return window.location.href;
-    }
+    },
   },
   async created() {
     await this.getPharmacyData();
@@ -129,15 +148,15 @@ export default {
     }, 60000);
 
     this.$alert("本網站已暫停維護，查詢資料之結果僅供參考", "", {
-      confirmButtonText: '確定',
+      confirmButtonText: "確定",
       type: "warning",
       showClose: false,
-      callback: action =>
+      callback: (action) =>
         this.$message({
           message: "本網站已暫停維護，查詢資料之結果僅供參考",
           type: "warning",
-          duration: 0
-        })
+          duration: 0,
+        }),
     });
   },
   watch: {
@@ -150,8 +169,8 @@ export default {
         this.inputText = this.$route.params.id;
         this.getFilterData();
       }
-    }
-  }
+    },
+  },
 } as ComponentOption;
 
 export type ComponentOption = ThisTypedComponentOptionsWithRecordProps<

@@ -1,6 +1,8 @@
 <template>
   <div class="Reslut" v-if="$route.params.id">
-    <div v-if="typeof data === 'string' || !data"  class="Reslut__noContent">{{ data }}</div>
+    <div v-if="typeof data === 'string' || !data" class="Reslut__noContent">
+      {{ data }}
+    </div>
     <div v-else class="Reslut__content">
       <div class="Reslut__geo">
         醫事機構代碼：{{ data.properties.id }}
@@ -35,9 +37,9 @@ export default {
   props: {
     data: {
       type: [Object, String],
-      default: undefined
-    }
-  }
+      default: undefined,
+    },
+  },
 } as ComponentOption;
 
 export type ComponentOption = ThisTypedComponentOptionsWithRecordProps<
